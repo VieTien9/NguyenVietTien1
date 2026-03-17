@@ -119,6 +119,24 @@ namespace NguyenVietTien1.Controllers
             return RedirectToAction(nameof(Index));
 
         }
+        // GET: ProductController/Search
+public IActionResult Search(string keyword)
+{
+    var data = from p in Data.SeedData.Products
+               join c in Data.SeedData.Categories 
+               on p.CategoryId equals c.CategoryId
+               where string.IsNullOrEmpty(keyword) 
+                     || p.ProductName.ToLower().Contains(keyword.ToLower())
+               select new ProductViewModel
+               {
+                   ProductId = p.ProductId,
+                   ProductName = p.ProductName,
+                   Price = p.Price,
+                   CategoryName = c.CategoryName
+               };
 
+    ViewBag.Keyword = keyword;
+    return View("Index", data);
+}
     }
 }
