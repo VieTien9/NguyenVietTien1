@@ -12,6 +12,10 @@
 <table class="table">
     <thead>
         <tr>
+            <form asp-action="Search" method="get">
+    <input type="text" name="keyword" value="@ViewBag.Keyword" placeholder="Nhập tên sản phẩm..." />
+    <button type="submit">Search</button>
+</form>
             <th>
                 @Html.DisplayNameFor(model => model.ProductId)
             </th>
